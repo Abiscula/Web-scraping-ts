@@ -1,6 +1,6 @@
 import express from 'express'
-import { DataUrl } from './Controller/DataUrl'
+import { ScrapRoutes } from './Controller/ScrapRoutes'
 
 export const routes = express.Router()
 
-routes.post('/bigboygames', DataUrl.getBigBoyUrl)
+routes.post('/bigboygames', ScrapRoutes.getBigBoyUrl)
