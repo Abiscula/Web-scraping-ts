@@ -1,11 +1,15 @@
 import  puppeteer from 'puppeteer'
 
-const url = 'https://www.bigboygames.com.br/mario-kart-8-deluxe-switch-2912-p989541'
+const gameUrl = 'https://www.bigboygames.com.br/mario-kart-8-deluxe-switch-2912-p989541'
 
 async function configuration() {
+    if(!gameUrl) {
+        console.log('Aguardando URL para busca de preço')
+        return
+    }
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(url);
+    await page.goto(gameUrl);
 
     return page
 };
