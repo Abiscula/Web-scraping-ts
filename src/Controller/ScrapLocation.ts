@@ -10,8 +10,26 @@ export class ScrapLocation {
             children = children.slice(3).replace(',', '.')
             return Number(children)
         })
+        if(price < 280) {
+            const screenshot = await page.screenshot({
+                encoding: 'base64',
+            });
+            console.log('end')
+            new Email(screenshot)
+        }
+    }
+
+    async Amazon(page: any) {
+
+        const price = await page.evaluate(() => {
+            const XPath = '//div[@id="corePrice_feature_div"]/div/span'
+            const priceSpan: any = document.evaluate(XPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+            let children = priceSpan.innerText
+            children = children.slice(2, 8).replace(',', '.')
+            return Number(children)
+        })
+        console.log(price)
         if(price < 320) {
-            // await page.screenshot({ path: 'example.png' })
             const screenshot = await page.screenshot({
                 encoding: 'base64',
             });
