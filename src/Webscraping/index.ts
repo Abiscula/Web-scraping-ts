@@ -12,6 +12,7 @@ async function configuration(siteName: string) {
     
     await page.setViewport({ width: 1366, height: 768 })
     await page.goto(await gameURL)
+    browser.close()
     return page
 }
 
