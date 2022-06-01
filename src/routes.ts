@@ -3,4 +3,4 @@ import { ScrapRoutes } from './Controller/ScrapRoutes'
 
 export const routes = express.Router()
 
-routes.post('/bigboygames', ScrapRoutes.gameToSearch)
+routes.post('/game4buy', ScrapRoutes.gameToSearch)
