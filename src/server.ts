@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(routes)
 
 sequelize.sync().then(() => console.log('Database is connected'))
-// startScraping()
+startScraping()
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
