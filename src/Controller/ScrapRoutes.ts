@@ -5,24 +5,33 @@ import { Sites } from '../db/model/Sites';
 export class ScrapRoutes {
 
     static async gameToSearch(req: Request, res: Response) {
-        const { site, game_name, game_url, game_price } = req.body
-
+        const { site } = req.body
         try {
             const db = await Sites.findAll({ where: {site: site}})
             if(db.length === 0) {
-                await Sites.create({ site: site, gameName: game_name,  gameUrl: game_url, gamePrice: game_price })
+                ScrapRoutes.createNewGame({...req.body})
             } else {
-                await Sites.update(
-                    { gameName: game_name,  gameUrl: game_url, gamePrice: game_price },
-                    { where: { site: site } })
+                ScrapRoutes.updateGame({...req.body})
             }
 
-            return res.status(200).json(db)
+            return res.status(201).json(db)
         }catch(err) {
             console.log(err)
             return res.status(400).json(err)
         }
-
     }
+
+
+    static async createNewGame({site, gameName, gameUrl, gamePrice}: any) {
+        await Sites.create({ site: site, gameName: gameName,  gameUrl: gameUrl, gamePrice: gamePrice })
+    }
+
+
+    static async updateGame({site, gameName, gameUrl, gamePrice}: any) {
+        await Sites.update(
+            { gameName: gameName,  gameUrl: gameUrl, gamePrice: gamePrice },
+            { where: { site: site } })
+    }
+
 
 }
