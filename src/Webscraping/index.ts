@@ -3,8 +3,6 @@ import { Amazon } from '../Controller/Sites/Amazon'
 import { BigBoyGames } from '../Controller/Sites/bigBoyGames'
 import { getGameURL } from '../utils/getGameURL'
 
-let interval = 30000
-
 async function configuration(siteName: string) {
     const gameURL = getGameURL(siteName)
     const browser = await puppeteer.launch()
@@ -18,10 +16,8 @@ async function configuration(siteName: string) {
 
 export function startScraping() {
     setInterval(async () => {
-        interval === 40000 ? interval = 30000 : interval += 1000
-        
         BigBoyGames(await configuration('BigBoyGames'))
         Amazon(await configuration('Amazon'))
 
-    }, interval)
+    }, Math.floor(Math.random() * (40000 - 30000)) + 30000)
 }
