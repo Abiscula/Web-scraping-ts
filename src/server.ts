@@ -1,15 +1,18 @@
 import express from 'express'
+import cors from 'cors'
 import { routes } from './routes'
-import { sequelize } from './db/config'
+import { startDB } from './db/config'
 import { startScraping } from './Webscraping'
 
-const app = express()
+export const app = express()
 const port = 3333
 
 app.use(express.json())
+app.use(cors())
 app.use(routes)
 
-sequelize.sync().then(() => console.log('Database is connected'))
+
+startDB()
 startScraping()
 
 app.listen(port, () => {
