@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import { Sites } from '../db/model/Sites';
 
+interface attributes {
+    site: string,
+    gameName: string,
+    gameUrl: string,
+    gamePrice: number
+}
 
 export class ScrapRoutes {
 
@@ -22,12 +28,12 @@ export class ScrapRoutes {
     }
 
 
-    static async createNewGame({site, gameName, gameUrl, gamePrice}: any) {
+    static async createNewGame({site, gameName, gameUrl, gamePrice}: attributes) {
         await Sites.create({ site: site, gameName: gameName,  gameUrl: gameUrl, gamePrice: gamePrice })
     }
 
 
-    static async updateGame({site, gameName, gameUrl, gamePrice}: any) {
+    static async updateGame({site, gameName, gameUrl, gamePrice}: attributes) {
         await Sites.update(
             { gameName: gameName,  gameUrl: gameUrl, gamePrice: gamePrice },
             { where: { site: site } })
