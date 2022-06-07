@@ -1,8 +1,10 @@
-import { Sites } from "../../db/model/Sites"
+
 import Email from "../../utils/Email"
+import { findGameInDB } from "../../utils/findGameInDb"
 
 export async function Amazon(page: any) {
-    const { dataValues:  { gamePrice } }: any = await Sites.findOne({ where: {site: 'Amazon'}})
+    
+    const gamePrice = await findGameInDB('Amazon')
     
     const price = await page.evaluate(() => {
         const XPath = '//div[@id="corePrice_feature_div"]/div/span'
@@ -16,7 +18,6 @@ export async function Amazon(page: any) {
             return children
         }
     })
-
     if(price <= gamePrice) {
         const screenshot = await page.screenshot({
             encoding: 'base64',
