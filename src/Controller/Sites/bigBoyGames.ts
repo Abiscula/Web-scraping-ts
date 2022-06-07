@@ -1,8 +1,9 @@
-import { Sites } from "../../db/model/Sites"
 import Email from "../../utils/Email"
+import { findGameInDB } from "../../utils/findGameInDb"
 
 export async function BigBoyGames(page: any) {
-    const { dataValues:  { gamePrice } }: any = await Sites.findOne({ where: {site: 'BigBoyGames'}})
+    
+    const gamePrice = await findGameInDB('BigBoyGames')
 
     const price = await page.evaluate(() => {
         let priceSpan: any = document.querySelector("#info_preco")
