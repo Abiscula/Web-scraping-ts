@@ -1,6 +1,6 @@
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
-# Web-scraping
+# Web-scraping Typescript
 
 <strong> Projeto criado para obter preço de jogos em sites variados </strong>
 
